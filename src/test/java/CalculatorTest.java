@@ -1,83 +1,56 @@
 import org.example.Main;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-// comment to check trigger
+
 public class CalculatorTest {
-    private Main calculator;
-
-    @Before
-    public void setup(){ calculator = new Main(); }
 
     @Test
-    public void test_add_positive()
-    {
-        double a = 1, b = 2;
-        double expec_res = 3;
-        double res = calculator.Addition(a, b);
-        Assert.assertEquals(expec_res, res, 0.000001);
+    public void testSquareRoot() {
+        double result = Main.SquareRoot(16);
+        Assert.assertEquals(4.0, result, 0.0001);
+
+        result = Main.SquareRoot(0);
+        Assert.assertEquals(0.0, result, 0.0001);
+
+        result = Main.SquareRoot(25);
+        Assert.assertEquals(5.0, result, 0.0001);
     }
 
     @Test
-    public void test_add_negative()
-    {
-        double a = 1, b = 2;
-        double expec_res = 0;
-        double res = calculator.Addition(a, b);
-        Assert.assertNotEquals(expec_res, res);
+    public void testFactorial() {
+        int result = Main.Factorial(5);
+        Assert.assertEquals(120, result);
+
+        result = Main.Factorial(0);
+        Assert.assertEquals(1, result);
+
+        result = Main.Factorial(1);
+        Assert.assertEquals(1, result);
     }
 
     @Test
-    public void test_sub_positive()
-    {
-        double a = 2, b = 2;
-        double expec_res = 0;
-        double res = calculator.Subtraction(a, b);
-        Assert.assertEquals(expec_res, res, 0.000001);
+    public void testNaturalLog() {
+        double result = Main.NaturalLog(Math.E);
+        Assert.assertEquals(1.0, result, 0.0001);
+
+        result = Main.NaturalLog(1);
+        Assert.assertEquals(0.0, result, 0.0001);
+
+        Assert.assertThrows(IllegalArgumentException.class, () -> Main.NaturalLog(-5));
     }
 
     @Test
-    public void test_sub_negative()
-    {
-        double a = 2, b = 2;
-        double expec_res = 2;
-        double res = calculator.Subtraction(a, b);
-        Assert.assertNotEquals(expec_res, res);
-    }
+    public void testPower() {
+        double result = Main.Power(2, 3);
+        Assert.assertEquals(8.0, result, 0.0001);
 
-    @Test
-    public void test_mult_positive()
-    {
-        double a = 2, b = 3;
-        double expec_res = 6;
-        double res = calculator.Multiplication(a, b);
-        Assert.assertEquals(expec_res, res, 0.000001);
-    }
+        result = Main.Power(5, 0);
+        Assert.assertEquals(1.0, result, 0.0001);
 
-    @Test
-    public void test_mult_negative()
-    {
-        double a = 2, b = 3;
-        double expec_res = 1;
-        double res = calculator.Multiplication(a, b);
-        Assert.assertNotEquals(expec_res, res);
-    }
+        result = Main.Power(0, 5);
+        Assert.assertEquals(0.0, result, 0.0001);
 
-    @Test
-    public void test_div_positive()
-    {
-        double a = 2, b = 2;
-        double expec_res = 1;
-        double res = calculator.Division(a, b);
-        Assert.assertEquals(res, expec_res, 0.000001);
-    }
-
-    @Test
-    public void test_div_negative()
-    {
-        double a = 2, b = 2;
-        double expec_res = 0;
-        double res = calculator.Division(a, b);
-        Assert.assertNotEquals(res, expec_res);
+        result = Main.Power(0, 0);  // Mathematical edge case
+        Assert.assertEquals(1.0, result, 0.0001);  // By definition, 0^0 is typically considered 1
     }
 }
